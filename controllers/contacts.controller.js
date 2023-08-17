@@ -22,7 +22,7 @@ const getById = async (req, res) => {
     const { id } = req.params;
     const results = await contactsService.getOne(id);
     if (!results) {
-      res.status(404).json({
+      return res.status(404).json({
         status: "not-found",
         code: 404,
         data: {
