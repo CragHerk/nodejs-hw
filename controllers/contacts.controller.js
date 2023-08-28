@@ -51,7 +51,8 @@ const getById = async (req, res) => {
 const create = async (req, res, next) => {
   try {
     const { body } = req;
-    const results = await contactsService.create(body);
+    const userId = req.user._id;
+    const results = await contactsService.create({ ...body, owner: userId });
     res.json({
       status: "success",
       code: 200,

@@ -8,8 +8,9 @@ const getOne = async (id) => {
   return Contact.findById(id);
 };
 
-const create = async (data) => {
-  return Contact.create(data);
+const create = async (ownerId, data) => {
+  const contactDataWithOwner = { ...data, owner: ownerId };
+  return Contact.create(contactDataWithOwner);
 };
 
 const update = async (id, data) => {

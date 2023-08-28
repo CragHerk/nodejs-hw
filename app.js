@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const contactsRouter = require("./routes/api/contacts.routes");
+const usersRouter = require("./routes/api/users.routes");
 require("dotenv").config();
 
 const app = express();
@@ -24,7 +25,8 @@ mongoose
     process.exit(1);
   });
 
-app.use("/api", contactsRouter);
+app.use("/api/contacts", contactsRouter);
+app.use("/api/users", usersRouter);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Not found" });
