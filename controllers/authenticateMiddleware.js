@@ -12,11 +12,14 @@ passport.use(
   new JwtStrategy(jwtOptions, async (payload, done) => {
     try {
       const user = await User.findById(payload.userId);
+      console.log("User found:", user);
+
       if (!user) {
         return done(null, false);
       }
       return done(null, user);
     } catch (error) {
+      console.error("JWT strategy error:", error);
       return done(error, false);
     }
   })
@@ -24,8 +27,8 @@ passport.use(
 
 const authenticateMiddleware = (req, res, next) => {
   passport.authenticate("jwt", { session: false }, (err, user) => {
-    const token = req.headers["authorization"].split(" ")[1];
-    if (!user || err || !token || token !== user.token) {
+    if (err || !user) {
+      console.error("Authentication error:", err);
       return res.status(401).json({
         status: "error",
         code: 401,
@@ -33,6 +36,7 @@ const authenticateMiddleware = (req, res, next) => {
         data: "Unauthorized",
       });
     }
+    console.log("Authenticated user:", user);
     req.user = user;
     next();
   })(req, res, next);
