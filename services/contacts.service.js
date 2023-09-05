@@ -1,16 +1,27 @@
 const Contact = require("../models/contacts.model");
 
-const getAll = async (query) => {
-  return Contact.find(query);
+const getAll = async (options, filter) => {
+  try {
+    const { page, limit } = options;
+    const results = await Contact.paginate(filter, { page, limit });
+    return results;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const getOne = async (id) => {
   return Contact.findById(id);
 };
 
-const create = async (ownerId, data) => {
-  const contactDataWithOwner = { ...data, owner: ownerId };
-  return Contact.create(contactDataWithOwner);
+const create = async (data) => {
+  try {
+    const contactDataWithOwner = { ...data, owner: data.owner };
+    const result = await Contact.create(contactDataWithOwner);
+    return result;
+  } catch (error) {
+    throw error;
+  }
 };
 
 const update = async (id, data) => {
@@ -19,7 +30,7 @@ const update = async (id, data) => {
   });
 };
 
-const updateFavorite = async (id, favorite) => {
+const updateContact = async (id, favorite) => {
   return Contact.findByIdAndUpdate(
     id,
     { favorite },
@@ -38,6 +49,6 @@ module.exports = {
   getOne,
   create,
   update,
-  updateFavorite,
+  updateContact,
   remove,
 };
