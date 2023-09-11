@@ -6,16 +6,41 @@
     "start": "cross-env NODE_ENV=production node ./server.js",
     "start:dev": "cross-env NODE_ENV=development nodemon ./server.js",
     "lint": "eslint **/*.js",
+<<<<<<< Updated upstream
     "lint:fix": "eslint --fix **/*.js"
+=======
+    "lint:fix": "eslint --fix **/*.js",
+    "test": "jest ./controllers/auth.controller.test.js"
+>>>>>>> Stashed changes
   },
   "dependencies": {
     "cors": "2.8.5",
     "cross-env": "7.0.3",
     "dotenv": "^16.3.1",
+<<<<<<< Updated upstream
     "express": "4.17.1",
     "mongodb": "^5.7.0",
     "mongoose": "^7.4.3",
     "morgan": "1.10.0"
+=======
+    "express": "^4.17.1",
+    "fs.promises": "^0.1.2",
+    "gravatar": "^1.8.2",
+    "jimp": "^0.22.10",
+    "joi": "^17.10.1",
+    "jsonwebtoken": "^9.0.1",
+    "mime-types": "^2.1.35",
+    "mongodb": "^5.7.0",
+    "mongoose": "^7.5.0",
+    "mongoose-paginate-v2": "^1.7.31",
+    "morgan": "1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemailer": "^6.9.5",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "supertest": "^6.3.3",
+    "uuid": "^9.0.0"
+>>>>>>> Stashed changes
   },
   "devDependencies": {
     "eslint": "7.19.0",
